@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>
+        Upload CSV
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+    <h3>
+        Upload Exercises
+    </h3>
+    <form method="POST" th:action="@{/upload-exercise-csv}" enctype="multipart/form-data">
+        <div class="mb-3" >
+            <label for="file" class="form-label">Choose CSV</label>
+            <input type="file" name="file" class="form-control-file" id="file" accept=".csv" />
+        </div>
+        <input type="submit" class="btn btn-primary mb-3" />
+
+    </form>
+</body>
+</html>
