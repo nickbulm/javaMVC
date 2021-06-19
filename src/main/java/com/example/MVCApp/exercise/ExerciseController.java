@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class ExerciseController {
@@ -26,9 +28,39 @@ public class ExerciseController {
     @Autowired
     ExerciseService service;
 
+    @GetMapping("/")
+    public String index(){
+        return "redirect:exercise-list";
+    }
+
     @GetMapping("/upload")
     public String upload(){
         return "upload";
+    }
+    @GetMapping("/create-form")
+    public String createForm(){
+        return "create-exercise-form";
+    }
+
+    @PostMapping("/create-exercise")
+    public String createExercise(@ModelAttribute("Exercise") Exercise form, Model model){
+        exerciseRepository.save(
+                new Exercise(
+                        form.getName(),
+                        form.getCategory(),
+                        form.getClassification(),
+                        form.getPrimaryAction(),
+                        form.getSecondaryAction1(),
+                        form.getSecondaryAction2(),
+                        form.getPrimaryMuscle(),
+                        form.getSynergist1(),
+                        form.getSynergist2(),
+                        form.getEquipment1(),
+                        form.getEquipment2(),
+                        form.getMedia(),
+                        form.getInstructions()
+                ));
+        return "redirect:exercise-list";
     }
 
     @GetMapping("/exercise-list")

@@ -10,9 +10,12 @@
 <body>
 <div class="">
     <div class="">
-        <div class="">
+        <div class="container">
             <h1>File Upload Status</h1>
-
+            <div>
+                <a class="btn btn-success btn-lg" href="/create-form">Add Exercise</a>
+                <a class="btn btn-secondary btn-lg" href="/upload">Upload CSV</a>
+            </div>
             <div class="alert alert-danger" role="alert" th:if="${!status}">
                 <strong>Error:</strong>
                 <span th:text="${message}"></span>
@@ -27,16 +30,22 @@
                     <th scope="col">Classification</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr th:each="exercise, i : ${data.getContent()}">
+                <tbody >
+                <div th:if="${data} != null" >
+                    <tr th:each="exercise, i : ${data.getContent()}">
                     <th scope="row" th:text="${i.index + 1}"></th>
                     <td th:text="${exercise.name}"></td>
                     <td th:text="${exercise.category}"></td>
                     <td th:text="${exercise.classification}"></td>
                 </tr>
+                </div>
+                <div th:if="${data} == null">
+                    No Exercises Found!
+                </div>
+
                 </tbody>
             </table>
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example" th:if="${data} != null">
                 <ul class="pagination">
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
