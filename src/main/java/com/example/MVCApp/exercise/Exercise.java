@@ -2,6 +2,14 @@ package com.example.MVCApp.exercise;
 
 import javax.persistence.*;
 
+/**
+ * AD: have a look at Lombok library: https://projectlombok.org/setup/maven
+ * the getter/setter methods here are "boilerplate" in that you'll need to re-write them for every class even though they
+ * don't do anything special
+ * Lombok abstracts this and will create the methods at runtime so you only need to declare variables could reduce this
+ * class to ~40 Lines
+ *
+ */
 @Entity
 @Table
 public class Exercise {
