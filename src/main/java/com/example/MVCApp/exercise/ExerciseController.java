@@ -94,6 +94,18 @@ public class ExerciseController {
                         .build();
                 List<Exercise> exercises = csvToBean.parse();
 
+//                I'd recommend trying something non-blocking here, then the user can submit the csv and immediately
+//                  be redirected while the controller saves the exercises behind the scenes
+//                This is a hack attempt at saving them in a thread (runs async) but it locked up the db
+//                A better option would be to utilise Flux and Mono: https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html
+//                Runnable r = new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        exercises.forEach(exerciseRepository::save);
+//                    }
+//                };
+//                Thread t = new Thread(r);
+//                t.start();
                 exerciseRepository.saveAll(exercises);
 
             } catch (Exception ex) {
